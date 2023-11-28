@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MVCCRUD.Models.EmpModel>
+
+@{
+    ViewBag.Title = "Reademp";
+}
+
+<h2 class="text-center">Get Employee Details</h2>
+
+<div id="title">
+	<h4>@Html.ActionLink("Create New Employee", "Create")</h4>
+</div>
+
+
+@{
+    var grid = new WebGrid(source: Model,
+                           defaultSort: "Name",
+                           rowsPerPage: 10);
+    grid.SortDirection = SortDirection.Ascending;
+}
+<div class="col-md-3">
+
+</div>
+<div class="col-md-8">
+    <div id="grid" class="table ">
+        @grid.GetHtml(
+                     tableStyle: "grid",
+                     headerStyle: "head",
+                     columns: grid.Columns(
+                     grid.Column("Name", "Name", style: "Name", format: @<text><a href="~/Employee/Editemp/@item.id">@item.Name</a></text>),
+                    grid.Column("Age", format:@<text>@item.age</text>),
+                grid.Column("Address", format:@<text>@item.address</text>),
+            grid.Column("Salary", format:@<text>@item.salary</text>),
+        grid.Column("Email", format:@<text>@item.email</text>)
+                                         )
+                                     )
+    </div>
+
+    <div>
+        @Html.ActionLink("Home", "Index")
+    </div>
+</div>
+<br />
+
